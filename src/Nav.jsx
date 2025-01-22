@@ -1,43 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import './Nav.css';
 
-// Styled components (optional; can also rely solely on CSS file)
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
- height: 1rem;
+  height: 1rem;
 `;
 
 const Nav = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const handleToggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
     <Container>
-      {/* Hidden checkbox for theme mode */}
-      <input hidden className="mode" id="theme-mode" type="checkbox" />
-      <div className="container">
+      <input
+        hidden
+        className="mode"
+        id="theme-mode"
+        type="checkbox"
+        checked={isDarkMode}
+        onChange={handleToggleTheme}
+      />
+      <div className={`container ${isDarkMode ? 'dark' : 'light'}`}>
         <div className="wrap">
-          {/* Radio button group */}
-          <input hidden className="rd-1" name="radio" id="rd-1" type="radio" defaultChecked />
-          <label style={{ '--index': 0 }} className="label" htmlFor="rd-1">
-            <span>About Me</span>
+          <input type="radio" id="rd-1" name="nav" className="rd-1" />
+          <label htmlFor="rd-1" className="label" style={{ '--index': 0 }}>
+            <Link to="/about-me" className="link_">
+              <span>About Me</span>
+            </Link>
           </label>
 
-          <input hidden className="rd-2" name="radio" id="rd-2" type="radio" />
-          <label style={{ '--index': 1 }} className="label" htmlFor="rd-2">
-            <span>Summary</span>
+          <input type="radio" id="rd-2" name="nav" className="rd-2" />
+          <label htmlFor="rd-2" className="label" style={{ '--index': 1 }}>
+            <Link to="/summary" className="link_">
+              <span>Summary</span>
+            </Link>
           </label>
 
-          <input hidden className="rd-3" name="radio" id="rd-3" type="radio" />
-          <label style={{ '--index': 2 }} className="label" htmlFor="rd-3">
-            <span>Portfolio</span>
+          <input type="radio" id="rd-3" name="nav" className="rd-3" />
+          <label htmlFor="rd-3" className="label" style={{ '--index': 2 }}>
+            <Link to="/portfolio" className="link_">
+              <span>Portfolio</span>
+            </Link>
           </label>
 
-          {/* Decoration bars */}
+          <input type="radio" id="rd-4" name="nav" className="rd-4" />
+          <label htmlFor="rd-4" className="label" style={{ '--index': 3 }}>
+            <Link to="/viz" className="link_">
+              <span>Sales Dashboard</span>
+            </Link>
+          </label>
+
           <div className="bar"></div>
           <div className="slidebar"></div>
 
-          {/* Theme toggle */}
           <label htmlFor="theme-mode" className="theme">
             <span className="light">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth="2">
