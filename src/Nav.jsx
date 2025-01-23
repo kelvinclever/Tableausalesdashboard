@@ -31,7 +31,7 @@ const Nav = () => {
         <div className="wrap">
           <input type="radio" id="rd-1" name="nav" className="rd-1" />
           <label htmlFor="rd-1" className="label" style={{ '--index': 0 }}>
-            <Link to="/about-me" className="link_">
+            <Link to="/about" className="link_">
               <span>About Me</span>
             </Link>
           </label>

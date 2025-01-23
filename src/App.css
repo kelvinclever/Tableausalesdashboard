@@ -1,9 +1,60 @@
-.App{
+General styles
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+.content_ {
+  padding: 20px;
+}
+
+/* Nav styles */
+.container {
+  background-color: var(--color-secondary);
+  top: 0;
+  position: sticky;
+  z-index: 2;
+  width: 100%;
+  height: auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
-  height: auto;
-  width: auto;
+  flex-direction: column;
+}
+
+/* Additional styles for Nav component */
+.wrap {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.label {
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.3s;
+}
+
+.label:hover {
+  background-color: var(--color-primary);
+}
+
+.bar, .slidebar {
+  height: 4px;
+  background-color: var(--color-primary);
+  width: 100%;
+}
+
+.theme {
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.theme svg {
+  width: 24px;
+  height: 24px;
 }

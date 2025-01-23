@@ -1,15 +1,32 @@
-.Viz{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    color: white;
+.viz__container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(7rem);
+  scrollbar-width: none;
+  overflow-x: hidden;
+}
+
+.tableauPlaceholder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.tableauPlaceholder object {
+  width: 100%;
+  height: 100%;
+}
+@media (min-width: 1024px) {
+  .viz__container {
+    padding: 20px;
   }
-  #vizContainer{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+  .tableauPlaceholder {
+    width: 80%;
+    height: 80%;
   }
+}

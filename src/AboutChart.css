@@ -1,0 +1,59 @@
+.about-page {
+    background-color: #121212; /* Dark background for a modern look */
+    color: #ffffff; /* White text for readability */
+    font-family: "Arial", sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: #4caf50; /* Accent color for headings */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    color: #76c7c0;
+    margin-bottom: 15px;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  ul li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  strong {
+    color: #4caf50;
+  }
+  
+  a {
+    color: #76c7c0;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
