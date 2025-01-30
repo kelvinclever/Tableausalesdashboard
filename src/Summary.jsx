@@ -35,7 +35,7 @@ const Summary= () => {
           <li>Optimize customer retention strategies and reduce churn rates.</li>
         </ul>
         <h2>How to Use</h2>
-        <p>
+        <p className="pp">
           The dashboard is highly interactive and user-friendly. Navigate through the tabs to explore different dimensions of churn. Utilize filters to drill down into specific data points or focus on particular metrics. Hover over visualizations for detailed insights and export reports using the toolbar options.
         </p>
         <h2>About the Developer</h2>

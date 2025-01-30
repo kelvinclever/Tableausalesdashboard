@@ -53,7 +53,7 @@ const Nav = () => {
           <input type="radio" id="rd-4" name="nav" className="rd-4" />
           <label htmlFor="rd-4" className="label" style={{ '--index': 3 }}>
             <Link to="/viz" className="link_">
-              <span>Sales Dashboard</span>
+              <span>Dashboard</span>
             </Link>
           </label>
 

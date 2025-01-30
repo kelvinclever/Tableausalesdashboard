@@ -1,25 +1,51 @@
 import { useEffect } from "react";
+import html2canvas from "html2canvas";
+import axios from "axios";
 import "./Viz.css";
 
 const Viz = () => {
-  const initViz = () => {
-    const scriptElement = document.createElement("script");
-    scriptElement.src = "https://public.tableau.com/javascripts/api/viz_v1.js";
-    scriptElement.type = "text/javascript";
-
-    const vizElement = document.getElementById("vizContainer").getElementsByTagName("object")[0];
-    if (vizElement) {
-      vizElement.parentNode.insertBefore(scriptElement, vizElement);
-    }
-  };
-
   useEffect(() => {
-    
+    const initViz = () => {
+      const scriptElement = document.createElement("script");
+      scriptElement.src = "https://public.tableau.com/javascripts/api/viz_v1.js";
+      scriptElement.type = "text/javascript";
+
+      const vizElement = document.getElementById("vizContainer").getElementsByTagName("object")[0];
+      if (vizElement) {
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      }
+    };
+
     initViz();
   }, []);
 
+  const captureScreenshot = async () => {
+    const vizContainer = document.getElementById("vizContainer");
+
+    if (!vizContainer) {
+      alert("Tableau visualization not found!");
+      return;
+    }
+
+    try {
+      // Capture the Tableau dashboard as an image
+      const canvas = await html2canvas(vizContainer);
+      const imageData = canvas.toDataURL("image/png");
+
+      // Send image to backend for OpenAI processing
+      const response = await axios.post("http://localhost:5000/api/analyze-dashboard", {
+        image: imageData,
+      });
+
+      alert("AI Description:\n" + response.data.description);
+    } catch (error) {
+      console.error("Screenshot error:", error);
+      alert("Failed to capture and analyze dashboard.");
+    }
+  };
+
   return (
-    <div  className="viz__container">
+    <div className="viz__container">
       <div className="tableauPlaceholder" id="vizContainer">
         <noscript>
           <a href="#">
@@ -43,6 +69,10 @@ const Viz = () => {
           <param name="language" value="en-GB" />
         </object>
       </div>
+
+      <button className="screenshot-button" onClick={captureScreenshot}>
+        Capture Screenshot & Analyze
+      </button>
     </div>
   );
 };

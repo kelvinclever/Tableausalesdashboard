@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: translateX(7rem);
+  margin-left:3rem;
   scrollbar-width: none;
   overflow-x: hidden;
 }
