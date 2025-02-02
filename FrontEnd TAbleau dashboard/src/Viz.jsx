@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import html2canvas from "html2canvas";
 import axios from "axios";
 import "./Viz.css";
 
@@ -28,11 +27,15 @@ const Viz = () => {
   const handleCapture = async () => {
     setCapturing(true);
     try {
-      const canvas = await html2canvas(captureRef.current);
-      const imageData = canvas.toDataURL("image/png");
-      setScreenshot(imageData);
-      setImage(imageData);
-      await analyzeImage(imageData);
+      const response = await axios.post("http://localhost:3001/capture");
+
+      if (response.data?.imageUrl) {
+        setScreenshot(response.data.imageUrl);
+        setImage(response.data.imageUrl);
+        await analyzeImage(response.data.imageUrl);
+      } else {
+        console.error("Failed to capture screenshot.");
+      }
     } catch (error) {
       console.error("Error capturing screenshot:", error);
     }
@@ -82,7 +85,6 @@ const Viz = () => {
           <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
           <param name="embed_code_version" value="3" />
           <param name="path" value="shared/TMKNW6QJB" />
-          <param name="toolbar" value="yes" />
           <param name="animate_transition" value="yes" />
           <param name="display_static_image" value="yes" />
           <param name="display_spinner" value="yes" />
@@ -91,37 +93,38 @@ const Viz = () => {
           <param name="language" value="en-GB" />
         </object>
       </div>
+      <div className="capture__container">
+        {/* Capture & Upload Section */}
+        <div className="actions">
+          <button className="capture-button" onClick={handleCapture} disabled={capturing}>
+            {capturing ? "Capturing..." : "Capture Screenshot & Analyze"}
+          </button>
 
-      {/* Capture & Upload Section */}
-      <div className="actions">
-        <button className="capture-button" onClick={handleCapture} disabled={capturing}>
-          {capturing ? "Capturing..." : "Capture Screenshot & Analyze"}
-        </button>
+          <input
+            type="file"
+            accept="image/*"
+            className="upload-input"
+            onChange={handleFileUpload}
+          />
+        </div>
 
-        <input
-          type="file"
-          accept="image/*"
-          className="upload-input"
-          onChange={handleFileUpload}
-        />
+        {/* Display Screenshot & AI Analysis */}
+        {image && (
+          <div className="image-container">
+            <h3>Captured or Uploaded Image</h3>
+            <img src={image} alt="Captured or Uploaded" className="preview-image" />
+          </div>
+        )}
+
+        {result && (
+          <div className="ai-analysis">
+            <h3>AI Description</h3>
+            {result.split("*").map((part, index) => (
+              <p key={index}>{part.trim()}</p>
+            ))}
+          </div>
+        )}
       </div>
-
-      {/* Display Image & AI Analysis */}
-      {image && (
-        <div className="image-container">
-          <h3>Captured or Uploaded Image</h3>
-          <img src={image} alt="Captured or Uploaded" className="preview-image" />
-        </div>
-      )}
-
-      {result && (
-        <div className="ai-analysis">
-          <h3>AI Analysis</h3>
-          {result.split("*").map((part, index) => (
-            <p key={index}>{part.trim()}</p>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

@@ -7,7 +7,9 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 1rem;
+  height: 2rem;
+  margin-top: 1rem;
+  position: sticky;
 `;
 
 const Nav = () => {

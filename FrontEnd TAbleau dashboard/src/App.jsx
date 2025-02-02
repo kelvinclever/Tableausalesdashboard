@@ -15,7 +15,7 @@ const App = () => {
         <div className="content_">
         <Routes>
           {/* Define the routes */}
-          <Route path="/viz" element={<Viz/>} />
+          <Route path="/" element={<Viz/>} />
           <Route path="/summary" element={<Summary />} />
           <Route path="/portfolio" element={<Portfolio />} />
 
